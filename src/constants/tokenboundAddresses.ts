@@ -3,7 +3,6 @@ import erc6551RegistryAbiV2 from "../abis/v2/registry.abi.json";
 import erc6551AccountV3ABI from "../abis/v3/account.abi.json";
 import erc6551RegistryV3ABI from "../abis/v3/registry.abi.json";
 import { Abi } from "starknet";
-
 type Standard6551Deployment = {
   ADDRESS: string;
   ABI: Abi;
