@@ -64,12 +64,12 @@ export const ERC_6551_DEPLOYMENTS: Standard6551Deployments = {
     V3: {
       IMPLEMENTATION: {
         ADDRESS:
-          "0x29d2a1b11dd97289e18042502f11356133a2201dd19e716813fb01fbee9e9a4",
+          "0xbe8863311f24317dff8af16deb1285ec5b035e57cf9beda545c341c339b925",
         ABI: erc6551AccountV3ABI as Abi,
       },
       REGISTRY: {
         ADDRESS:
-          "0x23a6d289a1e5067d905e195056c322381a78a3bc9ab3b0480f542fad87cc580",
+          "0x4107f453e68bf4331a31316078bb73ecfcb767dc624ebd78f8c1e15b14c63bd",
         ABI: erc6551RegistryV3ABI as Abi,
       },
     },

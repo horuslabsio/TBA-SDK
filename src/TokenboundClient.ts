@@ -37,7 +37,6 @@ export class TokenboundClient {
   private registryAddress: string;
   private implementationAddress: string;
   private chain_id: string;
-  private version: string;
   public isInitialized: boolean = false;
   public registryAbi: Abi;
   public accountAbi: Abi;
@@ -63,7 +62,6 @@ export class TokenboundClient {
     this.jsonRPC = jsonRPC;
     this.isInitialized = true;
     this.chain_id = chain_id;
-    this.version = version;
 
     this.registryAddress =
       registryAddress ??
@@ -116,8 +114,6 @@ export class TokenboundClient {
     tokenId,
     salt,
   }: CreateAccountOptions): Promise<AccountResult> {
-    console.log("SDK Account", this.account);
-
     const contract = new Contract(
       this.registryAbi,
       this.registryAddress,
@@ -178,9 +174,7 @@ export class TokenboundClient {
     let call: MultiCall = {
       contractAddress: tbaAddress,
       entrypoint: this.supportsV3 ? "execute" : "__execute__",
-      calldata: CallData.compile({
-        calls,
-      }),
+      calldata: CallData.compile({ calls }),
     };
 
     try {
