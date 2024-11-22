@@ -1,2 +1,2 @@
-export { accountClient } from "./account"
-export { getProvider } from "./provider"
+export { accountClient } from "./account";
+export { getProvider } from "./provider";

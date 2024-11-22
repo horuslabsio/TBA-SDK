@@ -1,4 +1,4 @@
 export interface WalletClient {
-    address: string
-    privateKey: string
+  address: string;
+  privateKey: string;
 }

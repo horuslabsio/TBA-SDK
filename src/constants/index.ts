@@ -1,3 +1,3 @@
-export * from "./chainId"
-export * from "./version"
-export * from "./tokenboundAddresses"
+export * from "./chainId";
+export * from "./version";
+export * from "./tokenboundAddresses";

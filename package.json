@@ -33,7 +33,7 @@
     "test": "react-scripts test",
     "clean": "rm -rf node_modules/",
     "dev": "vite build --watch",
-    "format": "prettier --write --ignore-unknown"
+    "format": "prettier --write '**/*.{js,jsx,ts,tsx,json,css,md}'"
   },
   "eslintConfig": {
     "extends": [
@@ -58,6 +58,7 @@
     "@types/testing-library__jest-dom": "^5.14.9",
     "eslint": "^8.50.0",
     "eslint-config-prettier": "^9.0.0",
+    "prettier": "3.3.3",
     "starknet": "^6.11.0",
     "typescript": "^5.2.2",
     "vite": "^5.2.7",
