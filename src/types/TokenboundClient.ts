@@ -55,13 +55,11 @@ export interface GetHasPermissionOptions {
   permissionedAddress: string;
 }
 
-
 export interface SetPermissionOptions {
   tbaAddress: string;
   permissionedAddresses: string[];
   permissions: boolean[];
 }
-
 
 export interface ERC20TransferOptions {
   tbaAddress: string;
@@ -86,7 +84,6 @@ export interface LockAccountOptions {
   tbaAddress: string;
   lockUntill: number;
 }
-
 
 export interface UpgradeOptions {
   tbaAddress: string;

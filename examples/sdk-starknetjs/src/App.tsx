@@ -6,12 +6,11 @@ import {
   WalletClient,
   Call,
   TBAChainID,
-  TBAVersion
+  TBAVersion,
 } from "starknet-tokenbound-sdk";
 import FormatAddress from "./Address";
 
 function App() {
-
   const [account, setAccount] = useState("");
   const [deployStatus, setDeployStatus] = useState<boolean>();
   const [accountClassHash, setAccountClassHash] = useState<string>();
@@ -25,14 +24,16 @@ function App() {
 
   // replace with your address and priv key
   const walletClient: WalletClient = {
-    address: "0x07da6cca38Afcf430ea53581F2eFD957bCeDfF798211309812181C555978DCC3",
+    address:
+      "0x07da6cca38Afcf430ea53581F2eFD957bCeDfF798211309812181C555978DCC3",
     privateKey: process.env.REACT_APP_PRIVATE_KEY!,
   };
 
-  const V2_SALT = "240000000000"
+  const V2_SALT = "240000000000";
 
   // replace with your own permissioned address
-  const testPermissionedAddr: string = "0x04F1A720BC8D441139B9C27dff5Be5a740b310c8425abAC8da72C0609014E933"
+  const testPermissionedAddr: string =
+    "0x04F1A720BC8D441139B9C27dff5Be5a740b310c8425abAC8da72C0609014E933";
 
   const options = {
     walletClient: walletClient,
@@ -43,10 +44,10 @@ function App() {
   const tokenbound = new TokenboundClient(options);
 
   // replace with your test NFT
-  const tokenContract = "0x0000003697660a0981d734780731949ecb2b4a38d6a58fc41629ed611e8defda";
+  const tokenContract =
+    "0x0000003697660a0981d734780731949ecb2b4a38d6a58fc41629ed611e8defda";
   const tokenId = "50";
   const url = `https://sepolia.starkscan.co/contract/${account}`;
-
 
   const deployAccount = async () => {
     try {
@@ -138,7 +139,7 @@ function App() {
     try {
       await tokenbound.lock({
         tbaAddress: account,
-        lockUntill: 1728057939
+        lockUntill: 1728057939,
       });
       alert("Account was locked successfully");
     } catch (error) {
@@ -150,8 +151,9 @@ function App() {
   const upgradeAccount = async () => {
     try {
       await tokenbound.upgrade({
-        newClassHash: "0x45d67b8590561c9b54e14dd309c9f38c4e2c554dd59414021f9d079811621bd",
-        tbaAddress: account
+        newClassHash:
+          "0x45d67b8590561c9b54e14dd309c9f38c4e2c554dd59414021f9d079811621bd",
+        tbaAddress: account,
       });
       alert("Account was upgraded successfully");
     } catch (error) {
@@ -159,13 +161,12 @@ function App() {
     }
   };
 
-
   const setPermissions = async () => {
     try {
       await tokenbound.setPermission({
         tbaAddress: account,
         permissionedAddresses: [testPermissionedAddr],
-        permissions: [true]
+        permissions: [true],
       });
       alert("Permissions added successfully");
     } catch (error) {
@@ -173,25 +174,24 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    if (account && deployStatus) {
+      const getAccountOwner = async () => {
+        const nftowner = await tokenbound.getOwner({
+          tbaAddress: account,
+        });
+        setOwner(num.toHex(nftowner));
+      };
+      const getNFTOwner = async () => {
+        const nftowner = await tokenbound.getOwnerNFT(account as string);
+        setNftOwner(num.toHex(nftowner[0]));
+        setNftOwnerId(nftowner[1].toString());
+      };
 
- useEffect(() => {
- if(account && deployStatus){
-  const getAccountOwner = async () => {
-    const nftowner = await tokenbound.getOwner({
-      tbaAddress: account,
-    });
-    setOwner(num.toHex(nftowner));
-  };
-  const getNFTOwner = async () => {
-    const nftowner = await tokenbound.getOwnerNFT(account as string);
-    setNftOwner(num.toHex(nftowner[0]));
-    setNftOwnerId(nftowner[1].toString());
-  };
-
-  getAccountOwner()
-  getNFTOwner()
- }
- }, [account, deployStatus])
+      getAccountOwner();
+      getNFTOwner();
+    }
+  }, [account, deployStatus]);
 
   useEffect(() => {
     if (account && deployStatus) {
@@ -199,27 +199,24 @@ function App() {
         const isLocked = await tokenbound.isLocked({
           tbaAddress: account,
         });
-        setLockStatus(Boolean(isLocked[0]))
-        setTimeUntilUnlocks(isLocked[1].toString())
+        setLockStatus(Boolean(isLocked[0]));
+        setTimeUntilUnlocks(isLocked[1].toString());
       };
       const getAccountPermissions = async () => {
         const permission = await tokenbound.getPermission({
           tbaAddress: account,
           owner: owner,
-          permissionedAddress: testPermissionedAddr
+          permissionedAddress: testPermissionedAddr,
         });
 
         if (permission != null) {
-          setPermissionStatus(permission)
+          setPermissionStatus(permission);
         }
-      }
+      };
       getAccountPermissions();
       getLockStatus();
-
-    };
+    }
   }, [account, owner, deployStatus]);
-
-
 
   useEffect(() => {
     const getAccount = async () => {
@@ -228,7 +225,7 @@ function App() {
         tokenId: tokenId,
         salt: V2_SALT,
       });
-      
+
       setAccount(num.toHexString(account));
     };
 
@@ -247,25 +244,25 @@ function App() {
     getDeploymentStatus();
   }, [tokenContract]);
 
-
-
-
-
   return (
     <div className="">
       <section className="App-header py-10">
         <h1 className="my-2 text-gray-300">Testing Token bound SDK</h1>
         <div className="space-y-4 py-10">
           <div className=" flex gap-2">
-            <p className="text-[18px]" >NFT Contract:</p>
+            <p className="text-[18px]">NFT Contract:</p>
             <FormatAddress address={tokenContract} />
-
           </div>
 
-          <p className="text-lg">Token ID: <span className="text-bold">{tokenId}</span></p>
-          <div className="flex items-center gap-2"  >
+          <p className="text-lg">
+            Token ID: <span className="text-bold">{tokenId}</span>
+          </p>
+          <div className="flex items-center gap-2">
             <p className="text-lg ">Tokenbound Account: </p>
-            <a className="text-[#61dafb]" href={url} target="_blank"> <FormatAddress address={account} /></a>
+            <a className="text-[#61dafb]" href={url} target="_blank">
+              {" "}
+              <FormatAddress address={account} />
+            </a>
           </div>
           <p className="text-lg">
             Deployed: [Status: {deployStatus?.toString()}]
@@ -275,12 +272,11 @@ function App() {
             <FormatAddress address={accountClassHash} />
           </div>
           <p className="text-lg">
-            Locked Status: [Status: {lockStatus?.toString()}, Time until unlocks:{" "}
-            {timeUntilUnlocks} secs]
+            Locked Status: [Status: {lockStatus?.toString()}, Time until
+            unlocks: {timeUntilUnlocks} secs]
           </p>
           <p className="text-lg">
             Permission Status: [Status: {permissionStatus?.toString()}]
-
           </p>
           <div className="flex items-center gap-2">
             <p className="text-lg">Account Owner:</p>
@@ -296,8 +292,6 @@ function App() {
             <p className="text-lg">NFT Owner ID:</p>
             <FormatAddress address={nftOwnerId} />
           </div>
-
-
         </div>
 
         <div className="grid grid-cols-4 gap-4">
@@ -328,14 +322,12 @@ function App() {
             send NFT
           </button>
 
-
           <button
             onClick={lockAccount}
             className="bg-yellow-500 text-medium rounded-lg px-2 py-2"
           >
             Lock
           </button>
-
 
           <button
             onClick={upgradeAccount}
@@ -344,14 +336,12 @@ function App() {
             Upgrade
           </button>
 
-
           <button
             onClick={setPermissions}
             className="bg-orange-500 text-medium rounded-lg px-2 py-2"
           >
             Set Permissions
           </button>
-
         </div>
       </section>
     </div>
