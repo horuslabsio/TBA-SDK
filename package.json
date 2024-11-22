@@ -31,7 +31,9 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "react-scripts test",
-    "clean": "rm -rf node_modules/"
+    "clean": "rm -rf node_modules/",
+    "dev": "vite build --watch",
+    "format": "prettier --write --ignore-unknown"
   },
   "eslintConfig": {
     "extends": [
@@ -52,11 +54,11 @@
     ]
   },
   "devDependencies": {
-    "starknet": "^6.1.5",
     "@types/react": "^18.2.21",
     "@types/testing-library__jest-dom": "^5.14.9",
     "eslint": "^8.50.0",
     "eslint-config-prettier": "^9.0.0",
+    "starknet": "^6.11.0",
     "typescript": "^5.2.2",
     "vite": "^5.2.7",
     "vite-plugin-dts": "^3.8.1"

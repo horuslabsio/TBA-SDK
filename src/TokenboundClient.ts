@@ -65,25 +65,32 @@ export class TokenboundClient {
     this.chain_id = chain_id;
     this.version = version;
 
-    this.registryAddress = registryAddress ?? ERC_6551_DEPLOYMENTS[chain_id][version].REGISTRY.ADDRESS;
-    this.implementationAddress = implementationAddress ?? ERC_6551_DEPLOYMENTS[chain_id][version].IMPLEMENTATION.ADDRESS;
+    this.registryAddress =
+      registryAddress ??
+      ERC_6551_DEPLOYMENTS[chain_id][version].REGISTRY.ADDRESS;
+    this.implementationAddress =
+      implementationAddress ??
+      ERC_6551_DEPLOYMENTS[chain_id][version].IMPLEMENTATION.ADDRESS;
     this.registryAbi = ERC_6551_DEPLOYMENTS[chain_id][version].REGISTRY.ABI;
-    this.accountAbi = ERC_6551_DEPLOYMENTS[chain_id][version].IMPLEMENTATION.ABI;
+    this.accountAbi =
+      ERC_6551_DEPLOYMENTS[chain_id][version].IMPLEMENTATION.ABI;
 
-    const isV2 = (version && version === TBAVersion.V2);
+    const isV2 = version && version === TBAVersion.V2;
 
     if (isV2) {
-      this.supportsV3 = false
+      this.supportsV3 = false;
     }
   }
 
   public async getAccount(params: GetAccountOptions) {
-
     const { tokenContract, tokenId, salt } = params;
     const provider = getProvider(this.jsonRPC);
 
-    const contract = new Contract(this.registryAbi, this.registryAddress, provider);
-    console.log(this.version)
+    const contract = new Contract(
+      this.registryAbi,
+      this.registryAddress,
+      provider
+    );
 
     try {
       const payload = [
@@ -96,6 +103,7 @@ export class TokenboundClient {
       if (this.supportsV3) {
         payload.push(this.chain_id);
       }
+
       const address: BigNumberish = await contract.get_account(...payload);
       return address;
     } catch (error) {
@@ -103,30 +111,43 @@ export class TokenboundClient {
     }
   }
 
-  public async createAccount(
-    { tokenContract, tokenId, salt }: CreateAccountOptions
-  ): Promise<AccountResult> {
-    const contract = new Contract(this.registryAbi, this.registryAddress, this.account);
+  public async createAccount({
+    tokenContract,
+    tokenId,
+    salt,
+  }: CreateAccountOptions): Promise<AccountResult> {
+    console.log("SDK Account", this.account);
+
+    const contract = new Contract(
+      this.registryAbi,
+      this.registryAddress,
+      this.account
+    );
     const salt_arg = salt || tokenId;
     try {
       const payload = [
         this.implementationAddress,
         tokenContract,
-        tokenId,
+        cairo.uint256(tokenId),
         salt_arg,
       ];
 
       if (this.supportsV3) {
         payload.push(this.chain_id);
       }
+
       const result = await contract.create_account(...payload);
-      const account = await this.getAccount({ tokenContract, tokenId, salt: salt_arg });
+
+      const account = await this.getAccount({
+        tokenContract,
+        tokenId,
+        salt: salt_arg,
+      });
 
       return {
         transaction_hash: result?.transaction_hash.toString(),
         account: num.toHex(account),
       };
-
     } catch (error) {
       throw error;
     }
@@ -245,7 +266,7 @@ export class TokenboundClient {
     let { tbaAddress, owner, permissionedAddress } = options;
     const contract = new Contract(this.accountAbi, tbaAddress, this.account);
     try {
-      if (!this.supportsV3) return null
+      if (!this.supportsV3) return null;
       return await contract.has_permission(owner, permissionedAddress);
     } catch (error) {
       throw error;
@@ -256,7 +277,7 @@ export class TokenboundClient {
     let { tbaAddress, permissionedAddresses, permissions } = options;
     const contract = new Contract(this.accountAbi, tbaAddress, this.account);
     try {
-      if (!this.supportsV3) return null
+      if (!this.supportsV3) return null;
       return await contract.set_permission(permissionedAddresses, permissions);
     } catch (error) {
       throw error;
@@ -283,12 +304,11 @@ export class TokenboundClient {
     }
   }
 
-
   public async upgrade(options: UpgradeOptions) {
     let { tbaAddress, newClassHash } = options;
     const contract = new Contract(this.accountAbi, tbaAddress, this.account);
     try {
-      if (!this.supportsV3) return null
+      if (!this.supportsV3) return null;
       return await contract.upgrade(newClassHash);
     } catch (error) {
       throw error;
