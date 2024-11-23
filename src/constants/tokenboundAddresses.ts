@@ -24,7 +24,7 @@ export const ERC_6551_DEPLOYMENTS: Standard6551Deployments = {
     V2: {
       IMPLEMENTATION: {
         ADDRESS:
-          "0x7f63abcad960f980c12d650b2cc4c27a8f63ee1f6eb36ea8286a946a2330c1b",
+          "0x45d67b8590561c9b54e14dd309c9f38c4e2c554dd59414021f9d079811621bd",
         ABI: erc6551AccountAbiV2 as Abi,
       },
       REGISTRY: {
