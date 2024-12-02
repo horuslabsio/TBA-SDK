@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import { cairo, num } from "starknet";
+import {  num } from "starknet";
 import {
   TokenboundClient,
   WalletClient,
@@ -35,12 +35,23 @@ function App() {
   const testPermissionedAddr: string =
     "0x04F1A720BC8D441139B9C27dff5Be5a740b310c8425abAC8da72C0609014E933";
 
+    const registryAddress: string =
+    "0x23a6d289a1e5067d905e195056c322381a78a3bc9ab3b0480f542fad87cc580";
+  const implementationAddress: string =
+    "0x7396dc2e3ac3b50eac9b12447d7dcc2cfddef27405c680d46d6b13dae90d804";
+
+
+
   const options = {
-    walletClient: walletClient,
-    chain_id: TBAChainID.sepolia,
+    account: walletClient,
+    registryAddress: registryAddress,
+    implementationAddress: implementationAddress,
     version: TBAVersion.V3,
+    chain_id: TBAChainID.main,
     jsonRPC: "https://free-rpc.nethermind.io/sepolia-juno/v0_7",
   };
+
+
   const tokenbound = new TokenboundClient(options);
 
   // replace with your test NFT
