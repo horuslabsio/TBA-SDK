@@ -43,7 +43,7 @@ function App() {
 
 
   const options = {
-    account: walletClient,
+    walletClient: walletClient,
     registryAddress: registryAddress,
     implementationAddress: implementationAddress,
     version: TBAVersion.V3,
