@@ -1,16 +1,16 @@
 [
   {
-    "type": "impl",
     "name": "UpgradeableImpl",
+    "type": "impl",
     "interface_name": "token_bound_accounts::interfaces::IUpgradeable::IUpgradeable"
   },
   {
-    "type": "interface",
     "name": "token_bound_accounts::interfaces::IUpgradeable::IUpgradeable",
+    "type": "interface",
     "items": [
       {
-        "type": "function",
         "name": "upgrade",
+        "type": "function",
         "inputs": [
           {
             "name": "new_class_hash",
@@ -23,103 +23,109 @@
     ]
   },
   {
-    "type": "impl",
     "name": "AccountImpl",
+    "type": "impl",
     "interface_name": "token_bound_accounts::interfaces::IAccount::IAccount"
   },
   {
-    "type": "struct",
     "name": "core::array::Span::<core::felt252>",
+    "type": "struct",
     "members": [
-      { "name": "snapshot", "type": "@core::array::Array::<core::felt252>" }
+      {
+        "name": "snapshot",
+        "type": "@core::array::Array::<core::felt252>"
+      }
     ]
   },
   {
-    "type": "struct",
     "name": "core::starknet::account::Call",
+    "type": "struct",
     "members": [
       {
         "name": "to",
         "type": "core::starknet::contract_address::ContractAddress"
       },
-      { "name": "selector", "type": "core::felt252" },
-      { "name": "calldata", "type": "core::array::Span::<core::felt252>" }
+      {
+        "name": "selector",
+        "type": "core::felt252"
+      },
+      {
+        "name": "calldata",
+        "type": "core::array::Span::<core::felt252>"
+      }
     ]
   },
   {
-    "type": "struct",
     "name": "core::integer::u256",
+    "type": "struct",
     "members": [
-      { "name": "low", "type": "core::integer::u128" },
-      { "name": "high", "type": "core::integer::u128" }
+      {
+        "name": "low",
+        "type": "core::integer::u128"
+      },
+      {
+        "name": "high",
+        "type": "core::integer::u128"
+      }
     ]
   },
   {
-    "type": "enum",
     "name": "core::bool",
+    "type": "enum",
     "variants": [
-      { "name": "False", "type": "()" },
-      { "name": "True", "type": "()" }
+      {
+        "name": "False",
+        "type": "()"
+      },
+      {
+        "name": "True",
+        "type": "()"
+      }
     ]
   },
   {
-    "type": "interface",
     "name": "token_bound_accounts::interfaces::IAccount::IAccount",
+    "type": "interface",
     "items": [
       {
-        "type": "function",
         "name": "is_valid_signature",
+        "type": "function",
         "inputs": [
-          { "name": "hash", "type": "core::felt252" },
-          { "name": "signature", "type": "core::array::Span::<core::felt252>" }
+          {
+            "name": "hash",
+            "type": "core::felt252"
+          },
+          {
+            "name": "signature",
+            "type": "core::array::Span::<core::felt252>"
+          }
         ],
-        "outputs": [{ "type": "core::felt252" }],
+        "outputs": [
+          {
+            "type": "core::felt252"
+          }
+        ],
         "state_mutability": "view"
       },
       {
-        "type": "function",
         "name": "is_valid_signer",
+        "type": "function",
         "inputs": [
           {
             "name": "signer",
             "type": "core::starknet::contract_address::ContractAddress"
           }
         ],
-        "outputs": [{ "type": "core::felt252" }],
-        "state_mutability": "view"
-      },
-      {
-        "type": "function",
-        "name": "__validate__",
-        "inputs": [
+        "outputs": [
           {
-            "name": "calls",
-            "type": "core::array::Array::<core::starknet::account::Call>"
+            "type": "core::felt252"
           }
         ],
-        "outputs": [{ "type": "core::felt252" }],
-        "state_mutability": "external"
-      },
-      {
-        "type": "function",
-        "name": "__validate_declare__",
-        "inputs": [{ "name": "class_hash", "type": "core::felt252" }],
-        "outputs": [{ "type": "core::felt252" }],
         "state_mutability": "view"
       },
       {
+        "name": "__validate__",
         "type": "function",
-        "name": "__validate_deploy__",
-        "inputs": [
-          { "name": "class_hash", "type": "core::felt252" },
-          { "name": "contract_address_salt", "type": "core::felt252" }
-        ],
-        "outputs": [{ "type": "core::felt252" }],
-        "state_mutability": "view"
-      },
-      {
-        "type": "function",
-        "name": "__execute__",
         "inputs": [
           {
             "name": "calls",
@@ -127,13 +133,67 @@
           }
         ],
         "outputs": [
-          { "type": "core::array::Array::<core::array::Span::<core::felt252>>" }
+          {
+            "type": "core::felt252"
+          }
         ],
         "state_mutability": "external"
       },
       {
+        "name": "__validate_declare__",
         "type": "function",
+        "inputs": [
+          {
+            "name": "class_hash",
+            "type": "core::felt252"
+          }
+        ],
+        "outputs": [
+          {
+            "type": "core::felt252"
+          }
+        ],
+        "state_mutability": "view"
+      },
+      {
+        "name": "__validate_deploy__",
+        "type": "function",
+        "inputs": [
+          {
+            "name": "class_hash",
+            "type": "core::felt252"
+          },
+          {
+            "name": "contract_address_salt",
+            "type": "core::felt252"
+          }
+        ],
+        "outputs": [
+          {
+            "type": "core::felt252"
+          }
+        ],
+        "state_mutability": "view"
+      },
+      {
+        "name": "__execute__",
+        "type": "function",
+        "inputs": [
+          {
+            "name": "calls",
+            "type": "core::array::Array::<core::starknet::account::Call>"
+          }
+        ],
+        "outputs": [
+          {
+            "type": "core::array::Array::<core::array::Span::<core::felt252>>"
+          }
+        ],
+        "state_mutability": "external"
+      },
+      {
         "name": "token",
+        "type": "function",
         "inputs": [],
         "outputs": [
           {
@@ -143,77 +203,108 @@
         "state_mutability": "view"
       },
       {
-        "type": "function",
         "name": "owner",
+        "type": "function",
         "inputs": [],
         "outputs": [
-          { "type": "core::starknet::contract_address::ContractAddress" }
+          {
+            "type": "core::starknet::contract_address::ContractAddress"
+          }
         ],
         "state_mutability": "view"
       },
       {
-        "type": "function",
         "name": "lock",
-        "inputs": [{ "name": "duration", "type": "core::integer::u64" }],
+        "type": "function",
+        "inputs": [
+          {
+            "name": "duration",
+            "type": "core::integer::u64"
+          }
+        ],
         "outputs": [],
         "state_mutability": "external"
       },
       {
-        "type": "function",
         "name": "is_locked",
+        "type": "function",
         "inputs": [],
-        "outputs": [{ "type": "(core::bool, core::integer::u64)" }],
+        "outputs": [
+          {
+            "type": "(core::bool, core::integer::u64)"
+          }
+        ],
         "state_mutability": "view"
       },
       {
-        "type": "function",
         "name": "supports_interface",
-        "inputs": [{ "name": "interface_id", "type": "core::felt252" }],
-        "outputs": [{ "type": "core::bool" }],
+        "type": "function",
+        "inputs": [
+          {
+            "name": "interface_id",
+            "type": "core::felt252"
+          }
+        ],
+        "outputs": [
+          {
+            "type": "core::bool"
+          }
+        ],
         "state_mutability": "view"
       }
     ]
   },
   {
-    "type": "constructor",
     "name": "constructor",
+    "type": "constructor",
     "inputs": [
       {
         "name": "token_contract",
         "type": "core::starknet::contract_address::ContractAddress"
       },
-      { "name": "token_id", "type": "core::integer::u256" }
-    ]
-  },
-  {
-    "type": "event",
-    "name": "token_bound_accounts::account::account::AccountComponent::AccountCreated",
-    "kind": "struct",
-    "members": [
       {
-        "name": "owner",
-        "type": "core::starknet::contract_address::ContractAddress",
-        "kind": "key"
+        "name": "token_id",
+        "type": "core::integer::u256"
       }
     ]
   },
   {
-    "type": "event",
-    "name": "token_bound_accounts::account::account::AccountComponent::AccountLocked",
     "kind": "struct",
+    "name": "token_bound_accounts::account::account::AccountComponent::AccountCreated",
+    "type": "event",
     "members": [
       {
-        "name": "account",
-        "type": "core::starknet::contract_address::ContractAddress",
-        "kind": "key"
-      },
-      { "name": "locked_at", "type": "core::integer::u64", "kind": "data" },
-      { "name": "duration", "type": "core::integer::u64", "kind": "data" }
+        "kind": "key",
+        "name": "owner",
+        "type": "core::starknet::contract_address::ContractAddress"
+      }
     ]
   },
   {
-    "type": "struct",
+    "kind": "struct",
+    "name": "token_bound_accounts::account::account::AccountComponent::AccountLocked",
+    "type": "event",
+    "members": [
+      {
+        "kind": "key",
+        "name": "account",
+        "type": "core::starknet::contract_address::ContractAddress"
+      },
+      {
+        "kind": "data",
+        "name": "locked_at",
+        "type": "core::integer::u64"
+      },
+      {
+        "kind": "data",
+        "name": "duration",
+        "type": "core::integer::u64"
+      }
+    ]
+  },
+  {
     "name": "core::array::Span::<core::array::Span::<core::felt252>>",
+    "type": "struct",
     "members": [
       {
         "name": "snapshot",
@@ -222,78 +313,82 @@
     ]
   },
   {
-    "type": "event",
+    "kind": "struct",
     "name": "token_bound_accounts::account::account::AccountComponent::TransactionExecuted",
-    "kind": "struct",
+    "type": "event",
     "members": [
-      { "name": "hash", "type": "core::felt252", "kind": "key" },
       {
+        "kind": "key",
+        "name": "hash",
+        "type": "core::felt252"
+      },
+      {
+        "kind": "data",
         "name": "response",
-        "type": "core::array::Span::<core::array::Span::<core::felt252>>",
-        "kind": "data"
+        "type": "core::array::Span::<core::array::Span::<core::felt252>>"
       }
     ]
   },
   {
-    "type": "event",
-    "name": "token_bound_accounts::account::account::AccountComponent::Event",
     "kind": "enum",
+    "name": "token_bound_accounts::account::account::AccountComponent::Event",
+    "type": "event",
     "variants": [
       {
+        "kind": "nested",
         "name": "AccountCreated",
-        "type": "token_bound_accounts::account::account::AccountComponent::AccountCreated",
-        "kind": "nested"
+        "type": "token_bound_accounts::account::account::AccountComponent::AccountCreated"
       },
       {
+        "kind": "nested",
         "name": "AccountLocked",
-        "type": "token_bound_accounts::account::account::AccountComponent::AccountLocked",
-        "kind": "nested"
+        "type": "token_bound_accounts::account::account::AccountComponent::AccountLocked"
       },
       {
+        "kind": "nested",
         "name": "TransactionExecuted",
-        "type": "token_bound_accounts::account::account::AccountComponent::TransactionExecuted",
-        "kind": "nested"
+        "type": "token_bound_accounts::account::account::AccountComponent::TransactionExecuted"
       }
     ]
   },
   {
-    "type": "event",
-    "name": "token_bound_accounts::upgradeable::upgradeable::UpgradeableComponent::Upgraded",
     "kind": "struct",
+    "name": "token_bound_accounts::upgradeable::upgradeable::UpgradeableComponent::Upgraded",
+    "type": "event",
     "members": [
       {
+        "kind": "data",
         "name": "class_hash",
-        "type": "core::starknet::class_hash::ClassHash",
-        "kind": "data"
+        "type": "core::starknet::class_hash::ClassHash"
       }
     ]
   },
   {
-    "type": "event",
+    "kind": "enum",
     "name": "token_bound_accounts::upgradeable::upgradeable::UpgradeableComponent::Event",
-    "kind": "enum",
+    "type": "event",
     "variants": [
       {
+        "kind": "nested",
         "name": "Upgraded",
-        "type": "token_bound_accounts::upgradeable::upgradeable::UpgradeableComponent::Upgraded",
-        "kind": "nested"
+        "type": "token_bound_accounts::upgradeable::upgradeable::UpgradeableComponent::Upgraded"
       }
     ]
   },
   {
-    "type": "event",
-    "name": "token_bound_accounts::presets::account::Account::Event",
     "kind": "enum",
+    "name": "token_bound_accounts::presets::account::Account::Event",
+    "type": "event",
     "variants": [
       {
+        "kind": "flat",
         "name": "AccountEvent",
-        "type": "token_bound_accounts::account::account::AccountComponent::Event",
-        "kind": "flat"
+        "type": "token_bound_accounts::account::account::AccountComponent::Event"
       },
       {
+        "kind": "flat",
         "name": "UpgradeableEvent",
-        "type": "token_bound_accounts::upgradeable::upgradeable::UpgradeableComponent::Event",
-        "kind": "flat"
+        "type": "token_bound_accounts::upgradeable::upgradeable::UpgradeableComponent::Event"
       }
     ]
   }
